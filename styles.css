@@ -1,0 +1,283 @@
+/* === Reset & Base === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* === Header & Navigation === */
+header {
+    background-color: #1f1f1f;
+    padding: 1rem;
+    color: white;
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #00bfff;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+nav a {
+    color: #00bfff;
+    text-decoration: none;
+}
+
+nav.visible {
+    display: block;
+}
+
+/* === Filtros por género === */
+.filtros {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.filtros button {
+    background-color: #333;
+    color: #00bfff;
+    border: none;
+    margin: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filtros button:hover {
+    background-color: #00bfff;
+    color: white;
+}
+
+/* === Galería de juegos === */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    margin-right: 300px;
+}
+
+.card {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h3 {
+    margin-top: 0.5rem;
+}
+
+/* === Detalle de juego === */
+.game-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    margin-right: 300px;
+}
+
+.game-detail section {
+    max-width: 600px;
+    text-align: left;
+}
+
+/* === Reseñas === */
+.reviews {
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: left;
+}
+
+.review {
+    background-color: #1f1f1f;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.stars {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+/* === Formularios === */
+form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input,
+textarea {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+}
+
+/* === Botones y enlaces === */
+button[type="submit"],
+button,
+.ver-carrito {
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ver-carrito {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* === Carrito lateral (escritorio) === */
+#cart {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 280px;
+    background-color: #1f1f1f;
+    color: white;
+    padding: 1rem;
+    border-left: 2px solid #00bfff;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+#cart h2 {
+    margin-top: 0;
+}
+
+#cart ul {
+    list-style: none;
+    padding: 0;
+}
+
+#cart li {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+/* === Carrito móvil deslizable === */
+.flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    padding: 0.8rem 1rem;
+    z-index: 1001;
+    display: none;
+}
+
+#carrito-movil {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #1f1f1f;
+    color: white;
+    padding: 1rem;
+    border-left: 2px solid #00bfff;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+#carrito-movil.abierto {
+    right: 0;
+}
+
+#cerrar-carrito {
+    background: none;
+    border: none;
+    color: #00bfff;
+    font-size: 1.5rem;
+    float: right;
+    cursor: pointer;
+}
+
+/* === Footer === */
+footer {
+    background-color: #1f1f1f;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    #cart {
+        display: none;
+    }
+
+    .flotante {
+        display: block;
+    }
+
+    .gallery,
+    .game-detail {
+        margin-right: 0;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    #menu-toggle {
+        display: block;
+    }
+
+    nav.visible {
+        display: flex;
+    }
+}

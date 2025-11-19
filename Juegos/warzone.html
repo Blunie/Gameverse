@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Call of Duty: Warzone - GameVerse</title>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+    <script src="../header.js"></script>
+    <main class="game-detail">
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1962663/header.jpg" alt="Warzone" />
+        <section>
+            <h2>Shooter táctico en línea</h2>
+            <p><strong>Precio:</strong> Gratis</p>
+            <p><strong>Género:</strong> Shooter</p>
+            <p>Combate en mapas masivos con armamento moderno, estrategia y trabajo en equipo. Modos battle royale y
+                misiones especiales.</p>
+            <button onclick="addToCart('Call of Duty: Warzone', 0, 'shooter')">Agregar al carrito</button>
+        </section>
+    </main>
+
+    <section class="reviews">
+        <h3>⭐ Reseñas de jugadores</h3>
+        <div id="reviews"></div>
+    </section>
+
+    <aside id="cart">
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </aside>
+
+    <footer>
+        <p>&copy; 2025 GameVerse</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = 'Call of Duty: Warzone';
+            const reviewsContainer = document.getElementById('reviews');
+            const reviews = JSON.parse(localStorage.getItem(`reviews-${game}`)) || [
+                { user: 'AndresSniper', comment: 'Muy intenso, los tiroteos son brutales.', rating: 5 },
+                { user: 'DaniTactico', comment: 'Buen juego pero los hackers arruinan algunas partidas.', rating: 3 }
+            ];
+            localStorage.setItem(`reviews-${game}`, JSON.stringify(reviews));
+            let total = 0;
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(({ user, comment, rating }) => {
+                total += rating;
+                const div = document.createElement('div');
+                div.className = 'review';
+                div.innerHTML = `<p><strong>${user}:</strong> “${comment}”</p><div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>`;
+                reviewsContainer.appendChild(div);
+            });
+            const avg = (total / reviews.length).toFixed(1);
+            const avgDisplay = document.createElement('p');
+            avgDisplay.innerHTML = `<strong>Promedio:</strong> ${avg} / 5`;
+            reviewsContainer.prepend(avgDisplay);
+        });
+    </script>
+
+    <!-- Botón flotante para abrir el carrito en móviles -->
+    <button id="abrir-carrito" class="flotante">🛒</button>
+
+    <!-- Carrito deslizable para móviles -->
+    <div id="carrito-movil" class="carrito-movil">
+        <button id="cerrar-carrito">✖</button>
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </div>
+</body>
+
+</html>

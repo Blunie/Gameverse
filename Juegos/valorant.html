@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Valorant - GameVerse</title>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+    <script src="../header.js"></script>
+    <main class="game-detail">
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg" alt="Valorant" />
+        <section>
+            <h2>Shooter táctico con habilidades</h2>
+            <p><strong>Precio:</strong> Gratis</p>
+            <p><strong>Género:</strong> Shooter</p>
+            <p>Combina puntería precisa con habilidades únicas en este shooter competitivo por rondas. Elige tu agente,
+                domina mapas y compite en partidas intensas 5v5.</p>
+            <button onclick="addToCart('Valorant', 0, 'shooter')">Agregar al carrito</button>
+        </section>
+    </main>
+
+    <section class="reviews">
+        <h3>⭐ Reseñas de jugadores</h3>
+        <div id="reviews"></div>
+    </section>
+
+    <aside id="cart">
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </aside>
+
+    <footer>
+        <p>&copy; 2025 GameVerse</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = 'Valorant';
+            const reviewsContainer = document.getElementById('reviews');
+            const reviews = JSON.parse(localStorage.getItem(`reviews-${game}`)) || [
+                { user: 'CamiloGamer', comment: '¡Adictivo! Cada partida es diferente. Me encanta el sistema de agentes.', rating: 5 },
+                { user: 'ValeriaFPS', comment: 'Muy competitivo, pero requiere buena conexión. Ideal para jugar con amigos.', rating: 4 },
+                { user: 'AndrésX', comment: 'Buen diseño de mapas y balance. A veces frustrante por los smurfs.', rating: 3 }
+            ];
+            localStorage.setItem(`reviews-${game}`, JSON.stringify(reviews));
+            let total = 0;
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(({ user, comment, rating }) => {
+                total += rating;
+                const div = document.createElement('div');
+                div.className = 'review';
+                div.innerHTML = `<p><strong>${user}:</strong> “${comment}”</p><div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>`;
+                reviewsContainer.appendChild(div);
+            });
+            const avg = (total / reviews.length).toFixed(1);
+            const avgDisplay = document.createElement('p');
+            avgDisplay.innerHTML = `<strong>Promedio:</strong> ${avg} / 5`;
+            reviewsContainer.prepend(avgDisplay);
+        });
+    </script>
+
+    <!-- Botón flotante para abrir el carrito en móviles -->
+    <button id="abrir-carrito" class="flotante">🛒</button>
+
+    <!-- Carrito deslizable para móviles -->
+    <div id="carrito-movil" class="carrito-movil">
+        <button id="cerrar-carrito">✖</button>
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </div>
+</body>
+
+</html>

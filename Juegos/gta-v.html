@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Grand Theft Auto V - GameVerse</title>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+    <script src="../header.js"></script>
+    <main class="game-detail">
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg" alt="GTA V" />
+        <section>
+            <h2>Acción y crimen en Los Santos</h2>
+            <p><strong>Precio:</strong> $74.300 COP</p>
+            <p><strong>Género:</strong> Acción</p>
+            <p>Explora una ciudad vibrante llena de caos, misiones, vehículos y libertad total. Vive la historia de tres
+                criminales en busca de redención y riqueza.</p>
+            <button onclick="addToCart('Grand Theft Auto V', 74300, 'accion')">Agregar al carrito</button>
+        </section>
+    </main>
+
+    <section class="reviews">
+        <h3>⭐ Reseñas de jugadores</h3>
+        <div id="reviews"></div>
+    </section>
+
+    <aside id="cart">
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </aside>
+
+    <footer>
+        <p>&copy; 2025 GameVerse</p>
+    </footer>
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = 'Grand Theft Auto V';
+            const reviewsContainer = document.getElementById('reviews');
+            const reviews = JSON.parse(localStorage.getItem(`reviews-${game}`)) || [
+                { user: 'NicoStreet', comment: 'Una locura total. Lo juego desde hace años y siempre hay algo nuevo.', rating: 5 },
+                { user: 'LuisaDrive', comment: 'Muy divertido, aunque el online puede ser caótico.', rating: 4 }
+            ];
+            localStorage.setItem(`reviews-${game}`, JSON.stringify(reviews));
+            let total = 0;
+            reviewsContainer.innerHTML = '';
+            reviews.forEach(({ user, comment, rating }) => {
+                total += rating;
+                const div = document.createElement('div');
+                div.className = 'review';
+                div.innerHTML = `<p><strong>${user}:</strong> “${comment}”</p><div class="stars">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>`;
+                reviewsContainer.appendChild(div);
+            });
+            const avg = (total / reviews.length).toFixed(1);
+            const avgDisplay = document.createElement('p');
+            avgDisplay.innerHTML = `<strong>Promedio:</strong> ${avg} / 5`;
+            reviewsContainer.prepend(avgDisplay);
+        });
+    </script>
+
+    <!-- Botón flotante para abrir el carrito en móviles -->
+    <button id="abrir-carrito" class="flotante">🛒</button>
+
+    <!-- Carrito deslizable para móviles -->
+    <div id="carrito-movil" class="carrito-movil">
+        <button id="cerrar-carrito">✖</button>
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-items"></ul>
+        <p id="total"><strong>Total:</strong> $0 COP</p>
+        <a href="../carrito.html" class="ver-carrito">Ver resumen completo</a>
+    </div>
+</body>
+
+</html>
